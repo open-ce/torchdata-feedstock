@@ -1,0 +1,53 @@
+{% set version = "0.6.0" %}
+
+package:
+  name: torchdata
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/pytorch/data
+  git_rev: v{{version}}-rc4
+
+build:
+  number: 1
+  string: py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
+  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed . -vv
+
+requirements:
+  build:
+    - cmake
+    - ninja
+    - python           {{ python }}
+    - setuptools       {{ setuptools }}
+    - curl
+    - openssl
+    - zlib             {{ zlib }}
+    - pytorch-base     {{ pytorch }}
+
+  run:
+    - python
+    - pytorch-base     {{ pytorch }}
+    - urllib3>=1.25
+    - requests
+
+test:
+  imports:
+    - torchdata
+    - torchdata.dataloader2
+    - torchdata.datapipes
+  source_files:
+    - test
+  requires:
+    - pytest
+    - expecttest
+
+about:
+  home: https://github.com/pytorch/data
+  license: BSD
+  license_file: LICENSE
+  summary: "Common modular data loading primitives for easily constructing flexible and performant data pipelines for PyTorch users"
+  doc_url: https://pytorch.org/data
+
+extra:
+  recipe-maintainers:
+    - open-ce/open-ce-dev-team
