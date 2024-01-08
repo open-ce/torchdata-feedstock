@@ -1,4 +1,4 @@
-{% set version = "0.6.0" %}
+{% set version = "0.7.1" %}
 
 package:
   name: torchdata
@@ -9,7 +9,7 @@ source:
   git_rev: v{{version}}
 
 build:
-  number: 2
+  number: 0
   string: py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed . -vv
 
