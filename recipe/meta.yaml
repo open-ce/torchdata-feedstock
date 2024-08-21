@@ -23,7 +23,7 @@ requirements:
     - openssl
     - zlib             {{ zlib }}
     - pytorch-base     {{ pytorch }}
-    - pip
+    - pip {{ pip }}
   run:
     - python
     - pytorch-base     {{ pytorch }}
